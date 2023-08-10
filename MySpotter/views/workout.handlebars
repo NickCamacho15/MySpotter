@@ -1,0 +1,16 @@
+ {{!-- Use the main layout --}}
+{{> layouts/main}}
+
+{{#contentFor "body"}}
+    <h2>{{workout.name}}</h2>
+    <p>Description: {{workout.description}}</p>
+    <h3>Exercises:</h3>
+    {{!-- Loop through exercises and display their details --}}
+    {{#each workout.exercises}}
+        <p>Exercise Name: {{name}}</p>
+        <p>Description: {{description}}</p>
+        <p>Sets: {{sets}}</p>
+        <p>Reps: {{reps}}</p>
+        <hr>
+    {{/each}}
+{{/contentFor}}
