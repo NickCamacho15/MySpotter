@@ -1,0 +1,9 @@
+ {{!-- Use the main layout --}}
+{{> layouts/main}}
+
+{{#contentFor "body"}}
+    <h2>{{exercise.name}}</h2>
+    <p>Description: {{exercise.description}}</p>
+    <p>Sets: {{exercise.sets}}</p>
+    <p>Reps: {{exercise.reps}}</p>
+{{/contentFor}}
