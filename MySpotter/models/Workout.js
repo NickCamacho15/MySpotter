@@ -11,13 +11,10 @@ Workout.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    description: {
+    name: {
       type: DataTypes.STRING,
-      allowNull: true,
-      validate: {
-        len: [100],
-      },
-    }, 
+      allowNull: false,
+    },
   },
   {
     sequelize,
@@ -28,4 +25,4 @@ Workout.init(
   }
 );
 
-module.exports = Workout ;
+module.exports = Workout;

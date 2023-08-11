@@ -11,27 +11,28 @@ Exercise.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    type: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate:{
-        isIn: [['hobbie', 'gym workout']],
-      }
+    workout_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'workout',
+        key: 'id',
+      },
     },
     name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    caloriesPerMinute: {
-    type: DataTypes.FLOAT,
-    allowNull: true,
-    },
-    description: {
       type: DataTypes.STRING,
-      allowNull: true,
-      validate: {
-        len: [100],
-      },
+      allowNull: false,
+    },
+    weight: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },
+    sets: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    reps: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
   },
   {
