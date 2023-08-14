@@ -1,4 +1,5 @@
 const { User } = require('../models');
+const bcrypt = require('bcrypt');
 
 module.exports = {
   getAllUsers: async (req, res) => {
@@ -21,16 +22,6 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-
-  createUser: async (req, res) => {
-    try {
-      const newUser = await User.create(req.body);
-      res.status(201).json(newUser);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  },
-
   updateUser: async (req, res) => {
     try {
       const result = await User.update(req.body, { where: { id: req.params.id } });
@@ -50,6 +41,41 @@ module.exports = {
         return res.status(404).json({ message: 'User not found' });
       }
       res.json({ message: 'User deleted successfully' });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+
+  login: async (req, res) => {
+    try {
+      const user = await User.findOne({ where: { username: req.body.username } });
+      if (!user) {
+        return res.status(401).json({ message: 'Incorrect username or password' });
+      }
+      const validPassword = await bcrypt.compare(req.body.password, user.password);
+      if (!validPassword) {
+        return res.status(401).json({ message: 'Incorrect username or password' });
+      }
+      req.session.user = user; // Save user info to the session
+      res.json({ message: 'Logged in successfully' });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+
+  logout: (req, res) => {
+    req.session.destroy((err) => {
+      if (err) {
+        return res.status(500).json(err);
+      }
+      res.json({ message: 'Logged out successfully' });
+    });
+  },
+  createUser: async (req, res) => {
+    try {
+      const hashedPassword = await bcrypt.hash(req.body.password, 10); 
+      const newUser = await User.create({ ...req.body, password: hashedPassword });
+      res.status(201).json(newUser);
     } catch (err) {
       res.status(500).json(err);
     }
