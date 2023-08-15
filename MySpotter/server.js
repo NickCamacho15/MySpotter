@@ -24,7 +24,8 @@ const sess = {
 };
 
 app.use(session(sess));
-const hbs = expressHandlebars.create({ defaultLayout: 'main' });
+const hbs = expressHandlebars.create({ defaultLayout: 'main',
+layoutsDir: path.join(__dirname, 'views/layouts') });
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
