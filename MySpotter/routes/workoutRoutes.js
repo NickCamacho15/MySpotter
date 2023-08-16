@@ -9,7 +9,7 @@ const {
 
 router.get('/', getAllWorkouts);
 router.get('/:id', getWorkoutById);
-router.post('/', createWorkout);
+router.post('/create', createWorkout);
 router.put('/:id', updateWorkout);
 router.delete('/:id', deleteWorkout);
 

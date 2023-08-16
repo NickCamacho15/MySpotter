@@ -56,8 +56,8 @@ module.exports = {
       if (!validPassword) {
         return res.status(401).json({ message: 'Incorrect username or password' });
       }
-      req.session.user = user; // Save user info to the session
-      res.json({ message: 'Logged in successfully' });
+      req.session.user = user; 
+      res.redirect('/index'); 
     } catch (err) {
       res.status(500).json(err);
     }
@@ -75,7 +75,8 @@ module.exports = {
     try {
       const hashedPassword = await bcrypt.hash(req.body.password, 10); 
       const newUser = await User.create({ ...req.body, password: hashedPassword });
-      res.status(201).json(newUser);
+      req.session.user = newUser; 
+      res.redirect('/index'); 
     } catch (err) {
       res.status(500).json(err);
     }
