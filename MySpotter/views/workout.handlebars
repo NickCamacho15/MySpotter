@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
     <div class="col-8 mt-5 text-center">
-        <h2>{{@root.workout.name}}</h2>
+        <h2>{{workout.name}}</h2>
     </div>
     <div class="col-8 text-right mb-3">
         <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#createExerciseModal">
@@ -52,7 +52,7 @@
                         <label for="reps" class="form-label">Reps</label>
                         <input id="reps" type="number" name="reps" class="form-control" placeholder="Reps" required>
                     </div>
-                    <button type="submit" class="btn btn-outline-dark">Add</button>
+                    <button type="submit" class="btn btn-outline-dark" data-bs-dismiss="modal">Add</button>
                 </form>
             </div>
         </div>

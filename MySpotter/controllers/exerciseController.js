@@ -26,7 +26,6 @@ module.exports = {
 
   createExercise: async (req, res) => {
     try {
-        console.log('Inside CreateExercise function')
       const workout = await Workout.findByPk(req.params.workout_id);
       if (workout.userId !== req.session.userId) {
         return res.status(403).json({ message: 'Unauthorized' });
