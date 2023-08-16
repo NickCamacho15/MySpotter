@@ -1,38 +1,57 @@
 async function newFormHandler(event) {
     event.preventDefault();
+    console.log('Inside newFormHandler');
 
     const exercise_name = document.querySelector('#exercise-name').value;
-    const exercise_description = document.querySelector('#exercise-description').value;
-    const exercise_sets = document.querySelector('#exercise-sets').value;
-    const exercise_reps = document.querySelector('#exercise-reps').value;
-    const exerciseForm = document.querySelector('.new-exercise-form');
+    const weight = document.querySelector('#weight').value;
+    const exercise_sets = document.querySelector('#sets').value;
+    const exercise_reps = document.querySelector('#reps').value;
 
-    if (exerciseForm) {
-        exerciseForm.addEventListener('submit', newFormHandler);
-    }
+    const workoutId = location.pathname.split('/')[2]; // Extracts the workoutId from the current URL
 
-    const response = await fetch(`/api/dish`, {
+    const response = await fetch(`/api/workouts/${workoutId}/exercises`, {
         method: 'POST',
         body: JSON.stringify({
-            exercise_name,
-            exercise_description,
-            exercise_sets,
-            exercise_reps,
+            name: exercise_name,
+            weight: weight,
+            sets: exercise_sets,
+            reps: exercise_reps,
         }),
         headers: {
             'Content-Type': 'application/json',
         },
-    });
+    });    
 
     if (response.ok) {
-        document.location.replace('/');
+        const data = await response.json();
+
+        // Close the modal
+        var createExerciseModal = new bootstrap.Modal(document.getElementById("createExerciseModal"));
+        createExerciseModal.hide();
+      
+        // Insert the new exercise into the DOM
+        const exercisesContainer = document.querySelector('.row.justify-content-center');
+        const newExercise = `
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm rounded">
+                    <div class="card-body text-center">
+                        <p>Exercise Name: ${data.name}</p>
+                        <p>Weight Used: ${data.weight}</p>
+                        <p>Sets: ${data.sets}</p>
+                        <p>Reps: ${data.reps}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+        exercisesContainer.insertAdjacentHTML('beforeend', newExercise);
     } else {
         alert('Failed to add exercise');
     }
 }
 
-const exerciseForm = document.querySelector('.new-exercise-form');
-if (exerciseForm) {
-    exerciseForm.addEventListener('submit', newFormHandler);
-}
-
+document.addEventListener("DOMContentLoaded", function() {
+    const exerciseForm = document.querySelector('.new-exercise-form');
+    if (exerciseForm) {
+        exerciseForm.addEventListener('submit', newFormHandler);
+    }
+});
