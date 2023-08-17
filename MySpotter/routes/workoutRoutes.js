@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const {
   getAllWorkouts,
-  getWorkoutById,
+  getWorkoutById, 
   createWorkout,
   updateWorkout,
   deleteWorkout,
@@ -12,8 +12,7 @@ router.get('/:id', getWorkoutById);
 router.post('/create', createWorkout);
 router.put('/:id', updateWorkout);
 router.delete('/:id', deleteWorkout);
-
 const exerciseRoutes = require('./exerciseRoutes');
-router.use('/:workoutId/exercises', exerciseRoutes);
+router.use('/:workout_id/exercises', exerciseRoutes);
 
 module.exports = router;

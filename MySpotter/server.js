@@ -9,6 +9,7 @@ const sequelize = require('./config/connection');
 const userRoutes = require('./routes/userRoutes');
 const exerciseRoutes = require('./routes/exerciseRoutes');
 const workoutRoutes = require('./routes/workoutRoutes');
+const models = require('./models');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -24,17 +25,21 @@ const sess = {
 };
 
 app.use(session(sess));
-const hbs = expressHandlebars.create({ defaultLayout: 'main',
-layoutsDir: path.join(__dirname, 'views/layouts') });
+const hbs = expressHandlebars.create({ 
+  defaultLayout: 'main',
+  layoutsDir: path.join(__dirname, 'views/layouts') 
+});
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/css', express.static(path.join(__dirname, '/public/css')));
+app.use('/js', express.static(path.join(__dirname, '/public/js')));
+
 
 app.use('/api/users', userRoutes);
-app.use('/api/exercises', exerciseRoutes);
+app.use('/api/workouts/:workout_id/exercises', exerciseRoutes);
 app.use('/api/workouts', workoutRoutes);
 app.use('/', viewRoutes);
 

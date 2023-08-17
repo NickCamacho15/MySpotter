@@ -1,4 +1,6 @@
 const { Exercise } = require('../models');
+const { Workout } = require('../models');
+
 
 module.exports = {
     getAllExercises: async (req, res) => {
@@ -24,16 +26,16 @@ module.exports = {
 
   createExercise: async (req, res) => {
     try {
-      const workout = await Workout.findByPk(req.params.workoutId);
+      const workout = await Workout.findByPk(req.params.workout_id);
       if (workout.userId !== req.session.userId) {
         return res.status(403).json({ message: 'Unauthorized' });
       }
-      const newExercise = await Exercise.create({ ...req.body, workoutId: req.params.workoutId });
+      const newExercise = await Exercise.create({ ...req.body, workout_id: req.params.workout_id });
       res.status(201).json(newExercise);
     } catch (err) {
       res.status(500).json(err);
     }
-  },
+  },  
 
   updateExercise: async (req, res) => {
     try {

@@ -13,4 +13,5 @@ router.post('/', createExercise);
 router.put('/:id', updateExercise);
 router.delete('/:id', deleteExercise);
 
+
 module.exports = router;
