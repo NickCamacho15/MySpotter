@@ -31,21 +31,28 @@ document.addEventListener("DOMContentLoaded", function() {
             // Close the modal using the existing reference
             createExerciseModal.hide();
 
-            // Insert the new exercise into the DOM
-            const exercisesContainer = document.querySelector('.row.justify-content-center');
-            const newExercise = `
-                <div class="col-md-4 mb-4">
-                    <div class="card shadow-sm rounded">
-                        <div class="card-body text-center">
-                            <p>Exercise Name: ${data.name}</p>
-                            <p>Weight Used: ${data.weight}</p>
-                            <p>Sets: ${data.sets}</p>
-                            <p>Reps: ${data.reps}</p>
-                        </div>
-                    </div>
-                </div>
-            `;
-            exercisesContainer.insertAdjacentHTML('beforeend', newExercise);
+  // Insert the new exercise into the DOM
+const exercisesContainer = document.querySelector('.row.justify-content-center');
+const newExercise = `
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm rounded">
+            <div class="card-body text-center">
+                <p>Exercise Name: ${data.name}</p>
+                <p>Weight Used: ${data.weight}</p>
+                <p>Sets: ${data.sets}</p>
+                <p>Reps: ${data.reps}</p>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                <button class="btn btn-outline-secondary btn-sm" onclick="editExercise(${data.id})">Edit</button>
+                <button type="button" class="btn btn-outline-danger" onclick="deleteExercise(${data.id})">
+                    <i class="fa fa-trash"></i> Delete
+                </button>
+            </div>
+        </div>
+    </div>
+`;
+exercisesContainer.insertAdjacentHTML('beforeend', newExercise);
+
         } else {
             alert('Failed to add exercise');
         }

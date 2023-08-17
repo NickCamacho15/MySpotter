@@ -21,16 +21,15 @@
                     <p class="card-text"><small>Created by: Unknown User</small></p>
                 {{/if}}
             </div>
-            <div class="card-footer d-flex justify-content-between">
-                <button class="btn btn-outline-secondary btn-sm" onclick="editWorkout({{id}})">Edit</button>
-                <button type="button" class="btn btn-outline-danger" onclick="deleteWorkout({{id}})">
-        <i class="fa fa-trash"></i> Delete
-    </button>
-            </div>
+                            <div class="card-footer d-flex justify-content-between">
+                    <button class="btn btn-outline-secondary btn-sm" onclick="editWorkout({{id}})">Edit</button>
+                    <button class="btn btn-outline-danger btn-sm" onclick="deleteWorkout({{id}})">
+                        <i class="fa fa-trash"></i> Delete
+                    </button>
+                </div>
         </div>
     </a>
 {{/each}}
-
     </div>
 </div>
 
