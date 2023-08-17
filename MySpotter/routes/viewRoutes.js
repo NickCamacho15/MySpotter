@@ -1,5 +1,19 @@
 const express = require('express');
 const router = express.Router();
+const { Exercise } = require('../models'); 
+
+router.get('/exercises/:id', async (req, res) => {
+  try {
+    const exercise = await Exercise.findByPk(req.params.id);
+    if (!exercise) {
+      return res.status(404).render('not-found', { message: 'Exercise not found' });
+    }
+    res.render('exercise', { exercise }); 
+  } catch (err) {
+    console.error(err);
+    res.status(500).render('error', { message: 'Internal Server Error' });
+  }
+});
 
 router.get('/', (req, res) => {
     if (req.session.user) {

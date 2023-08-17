@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     async function newFormHandler(event) {
         event.preventDefault();
-        console.log('Inside newFormHandler');
 
         const exercise_name = document.querySelector('#exercise-name').value;
         const weight = document.querySelector('#weight').value;
@@ -51,6 +50,27 @@ document.addEventListener("DOMContentLoaded", function() {
             alert('Failed to add exercise');
         }
     }
+
+    async function deleteExercise(exerciseId) {
+        const response = await fetch(`/api/exercises/${exerciseId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+    
+        if (response.ok) {
+            // Remove the exercise from the DOM
+            const exerciseElement = document.querySelector(`a[href="/workouts/${exerciseId}"]`);
+            if (exerciseElement) {
+                exerciseElement.remove();
+            }
+        } else {
+            alert('Failed to delete exercise');
+        }
+    }
+    window.deleteExercise = deleteExercise;
+    
 
     const exerciseForm = document.querySelector('.new-exercise-form');
     if (exerciseForm) {
