@@ -15,6 +15,19 @@ router.get('/exercises/:id', async (req, res) => {
   }
 });
 
+router.delete('/api/exercises/:id', async (req, res) => {
+  try {
+    const exercise = await Exercise.destroy({ where: { id: req.params.id } });
+    if (!exercise) {
+      return res.status(404).json({ message: 'Exercise not found' });
+    }
+    res.status(200).json({ message: 'Exercise deleted successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
 router.get('/', (req, res) => {
     if (req.session.user) {
         const username = req.session.user.username;

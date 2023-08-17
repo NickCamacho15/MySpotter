@@ -67,15 +67,18 @@ exercisesContainer.insertAdjacentHTML('beforeend', newExercise);
         });
     
         if (response.ok) {
-            // Remove the exercise from the DOM
-            const exerciseElement = document.querySelector(`a[href="/workouts/${exerciseId}"]`);
-            if (exerciseElement) {
-                exerciseElement.remove();
-            }
+            // Find the exercise element based on the exerciseId
+            const exerciseElements = document.querySelectorAll('.col-md-4');
+            exerciseElements.forEach(element => {
+                if (element.querySelector(`button[onclick="deleteExercise(${exerciseId})"]`)) {
+                    element.remove();
+                }
+            });
         } else {
             alert('Failed to delete exercise');
         }
     }
+    
     window.deleteExercise = deleteExercise;
     
 

@@ -1,34 +1,44 @@
-async function editFormHandler(event) {
-    event.preventDefault();
+function editExercise(exerciseId, name, weight, sets, reps) {
+    // Populate the form with existing values
+    document.querySelector('#edit-exercise-name').value = name;
+    document.querySelector('#edit-weight').value = weight;
+    document.querySelector('#edit-sets').value = sets;
+    document.querySelector('#edit-reps').value = reps;
 
-    const exercise_name = document.querySelector('#exercise-name').value;
-    const weight = document.querySelector('#weight').value;
-    const exercise_sets = document.querySelector('#sets').value;
-    const exercise_reps = document.querySelector('#reps').value;
-    const id = location.pathname.split('/')[3]; // Extracts the exerciseId from the current URL
+    // Open the modal
+    var editModal = new bootstrap.Modal(document.getElementById("editExerciseModal"));
+    editModal.show();
 
-    const response = await fetch(`/api/exercises/${id}`, {
-        method: 'PUT',
-        body: JSON.stringify({
-            name: exercise_name,
-            weight: weight,
-            sets: exercise_sets,
-            reps: exercise_reps,
-        }),
-        headers: {
-            'Content-Type': 'application/json',
-        },
+    // Event listener for form submission
+    document.querySelector('.edit-exercise-form').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        // Get updated values from the form
+        const updatedName = document.querySelector('#edit-exercise-name').value;
+        const updatedWeight = document.querySelector('#edit-weight').value;
+        const updatedSets = document.querySelector('#edit-sets').value;
+        const updatedReps = document.querySelector('#edit-reps').value;
+        const workout_id = location.pathname.split('/')[2];
+
+        // Make the PUT request
+        const response = await fetch(`/api/workouts/${workout_id}/exercises/${exerciseId}`, {
+            method: 'PUT',
+            body: JSON.stringify({
+                name: updatedName,
+                weight: updatedWeight,
+                sets: updatedSets,
+                reps: updatedReps,
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.ok) {
+            document.location.reload();
+        } else {
+            alert('Failed to edit exercise');
+        }        
     });
-
-    if (response.ok) {
-        document.location.replace(`/exercise/${id}`);
-    } else {
-        alert('Failed to edit exercise');
-    }
 }
-
-
-document
-  .querySelector('.edit-exercise-form')
-  .addEventListener('submit', editFormHandler);
 
