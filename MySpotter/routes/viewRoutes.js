@@ -28,6 +28,32 @@ router.delete('/api/exercises/:id', async (req, res) => {
   }
 });
 
+router.put('/api/exercises/:exerciseId', async (req, res) => {
+  try {
+      const exerciseId = req.params.exerciseId;
+      const { name, weight, sets, reps } = req.body;
+
+      const exercise = await Exercise.findByPk(exerciseId);
+      if (!exercise) {
+          return res.status(404).json({ error: 'Exercise not found' });
+      }
+
+      exercise.name = name;
+      exercise.weight = weight;
+      exercise.sets = sets;
+      exercise.reps = reps;
+
+      await exercise.save();
+
+      res.json({ success: true });
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Something went wrong' });
+  }
+});
+
+
+
 router.get('/', (req, res) => {
     if (req.session.user) {
         const username = req.session.user.username;
