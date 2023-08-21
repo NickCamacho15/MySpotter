@@ -1,44 +1,39 @@
-function editExercise(exerciseId, name, weight, sets, reps) {
-    // Populate the form with existing values
-    document.querySelector('#edit-exercise-name').value = name;
-    document.querySelector('#edit-weight').value = weight;
-    document.querySelector('#edit-sets').value = sets;
-    document.querySelector('#edit-reps').value = reps;
-
-    // Open the modal
-    var editModal = new bootstrap.Modal(document.getElementById("editExerciseModal"));
-    editModal.show();
-
-    // Event listener for form submission
-    document.querySelector('.edit-exercise-form').addEventListener('submit', async function(event) {
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelector(".edit-exercise-form").addEventListener("submit", function(event) {
         event.preventDefault();
 
-        // Get updated values from the form
-        const updatedName = document.querySelector('#edit-exercise-name').value;
-        const updatedWeight = document.querySelector('#edit-weight').value;
-        const updatedSets = document.querySelector('#edit-sets').value;
-        const updatedReps = document.querySelector('#edit-reps').value;
-        const workout_id = location.pathname.split('/')[2];
+        const exerciseId = document.getElementById("edit-exercise-id").value;
+        const name = document.getElementById("edit-exercise-name").value;
+        const weight = document.getElementById("edit-exercise-weight").value;
+        const sets = document.getElementById("edit-exercise-sets").value;
+        const reps = document.getElementById("edit-exercise-reps").value;
 
-        // Make the PUT request
-        const response = await fetch(`/api/workouts/${workout_id}/exercises/${exerciseId}`, {
+        fetch(`/api/exercises/${exerciseId}`, {
             method: 'PUT',
-            body: JSON.stringify({
-                name: updatedName,
-                weight: updatedWeight,
-                sets: updatedSets,
-                reps: updatedReps,
-            }),
             headers: {
                 'Content-Type': 'application/json',
             },
-        });
+            body: JSON.stringify({ name, weight, sets, reps }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Locate the exercise element and update its content
+                const exerciseElement = document.querySelector(`button[data-id="${exerciseId}"]`).closest('.col-md-4');
+                exerciseElement.querySelector('.card-body p:nth-child(1)').innerText = `Exercise Name: ${name}`;
+                exerciseElement.querySelector('.card-body p:nth-child(2)').innerText = `Weight Used: ${weight}`;
+                exerciseElement.querySelector('.card-body p:nth-child(3)').innerText = `Sets: ${sets}`;
+                exerciseElement.querySelector('.card-body p:nth-child(4)').innerText = `Reps: ${reps}`;
 
-        if (response.ok) {
-            document.location.reload();
-        } else {
-            alert('Failed to edit exercise');
-        }        
+                // Close the modal
+                var editModal = document.getElementById('editExerciseModal');
+            var bsModal = new bootstrap.Modal(editModal);
+            bsModal.hide();
+
+            } else {
+                alert('Error updating exercise.');
+            }
+        })
+        .catch(error => console.error('There was an error updating the exercise:', error));
     });
-}
-
+});
