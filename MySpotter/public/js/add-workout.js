@@ -1,28 +1,3 @@
-function createWorkoutCardElement(workoutName, workoutId) {
-    const workoutCard = document.createElement('div');
-    workoutCard.classList.add('col-md-4', 'mb-4');
-
-    const cardContent = `
-        <div class="card shadow-sm rounded">
-            <div class="card-body text-center">
-                <h5 class="card-title">${workoutName}</h5>
-                <p class="card-text"><small>Created by: {{../user.username}}</small></p>
-            </div>
-            <div class="card-footer d-flex justify-content-between">
-                <button class="btn btn-outline-secondary btn-sm" onclick="editWorkout(${workoutId})">Edit</button>
-                <button type="button" class="btn btn-outline-danger" onclick="deleteWorkout(${workoutId})">
-                    <i class="fa fa-trash"></i> Delete
-                </button>
-            </div>
-        </div>
-    `;
-
-    workoutCard.innerHTML = cardContent;
-    return workoutCard;
-}
-
-    
-
     async function newFormHandler(event) {
         event.preventDefault();
     
@@ -57,7 +32,7 @@ function createWorkoutCardElement(workoutName, workoutId) {
                     </div>
                 </a>
             `;
-            workoutsContainer.insertAdjacentHTML('beforeend', newCard);
+            location.reload();
           } else {
             alert('Failed to add workout');
           }                 
