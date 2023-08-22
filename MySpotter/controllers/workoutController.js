@@ -3,8 +3,8 @@ const { Workout } = require('../models');
 module.exports = {
     getAllWorkouts: async (req, res) => {
         try {
-          const workouts = await Workout.findAll({ where: { userId: req.session.userId } });
-          res.json(workouts);
+          const workouts = await Workout.findAll({ where: { user_id: req.session.userId } });
+          res.render('index', {workouts});
         } catch (err) {
           res.status(500).json(err);
         }
@@ -20,9 +20,10 @@ module.exports = {
           res.status(500).json(err);
         }
       },
-      createWorkout: async (req, res) => {
+      
+    createWorkout: async (req, res) => {
     try {
-      const newWorkout = await Workout.create({ ...req.body, userId: req.session.userId });
+      const newWorkout = await Workout.create({ ...req.body, user_id: req.session.userId });
       const username = req.session.user.username;
   
       res.status(201).json({
@@ -33,8 +34,6 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  
-  
 
   updateWorkout: async (req, res) => {
     try {
