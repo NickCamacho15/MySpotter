@@ -20,7 +20,8 @@ module.exports = {
           res.status(500).json(err);
         }
       },
-      createWorkout: async (req, res) => {
+      
+    createWorkout: async (req, res) => {
     try {
       const newWorkout = await Workout.create({ ...req.body, userId: req.session.userId });
       const username = req.session.user.username;
@@ -33,8 +34,6 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  
-  
 
   updateWorkout: async (req, res) => {
     try {
