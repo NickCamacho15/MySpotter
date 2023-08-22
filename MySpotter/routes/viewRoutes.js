@@ -56,6 +56,7 @@ router.put('/api/exercises/:exerciseId', async (req, res) => {
 
 router.get('/', (req, res) => {
     if (req.session.loggedIn) {
+      console.log(req.session,'/');
       res.redirect('/api/workouts/');
     } else {
         res.render('home');
@@ -63,7 +64,12 @@ router.get('/', (req, res) => {
 });
 
 router.get('/index', (req, res) => {
-      res.render('index');
+    if (req.session.loggedIn) {
+      console.log(req,'/index');
+      res.redirect('/api/workouts/');
+    } else {
+        res.render('home');
+    }
   });
 
 router.get('/login', (req, res) => {
