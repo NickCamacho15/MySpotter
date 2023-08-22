@@ -56,21 +56,35 @@ module.exports = {
       if (!validPassword) {
         return res.status(401).json({ message: 'Incorrect username or password' });
       }
-      req.session.user = user; 
-      res.redirect('/index'); 
+
+      req.session.save(() => {
+        req.session.loggedIn = true;
+        console.log(
+          'File: user-routes.js ~ line 57 ~ req.session.save ~ req.session.cookie',
+          req.session.cookie
+        );
+        req.session.userId = user.id;
+        req.session.user = user; 
+        res
+          .status(200)
+          .json({ message: 'You are now logged in!' });
+      });
+
     } catch (err) {
       res.status(500).json(err);
     }
   },
 
   logout: (req, res) => {
-    req.session.destroy((err) => {
-      if (err) {
-        return res.status(500).json(err);
-      }
-      res.json({ message: 'Logged out successfully' });
-    });
+    if (req.session.loggedIn) {
+      req.session.destroy(() => {
+        res.status(204).end();
+      });
+    } else {
+      res.status(404).end();
+    }
   },
+
   createUser: async (req, res) => {
     try {
       const hashedPassword = await bcrypt.hash(req.body.password, 10); 

@@ -23,7 +23,7 @@ module.exports = {
       
     createWorkout: async (req, res) => {
     try {
-      const newWorkout = await Workout.create({ ...req.body, userId: req.session.userId });
+      const newWorkout = await Workout.create({ ...req.body, user_id: req.session.userId });
       const username = req.session.user.username;
   
       res.status(201).json({
