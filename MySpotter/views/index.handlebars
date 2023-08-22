@@ -8,23 +8,24 @@
             Create New Workout
         </button>
     </div>
-
     <div class="row justify-content-center">
-     {{#each workouts}}
-    <a href="/workouts/{{dataValues.id}}" class="col-md-4 mb-4 text-decoration-none text-dark">
-        <div class="card shadow-sm rounded">
-            <div class="card-body text-center">
-                <h5 class="card-title">{{dataValues.name}}</h5>
-            </div>
-            <div class="card-footer d-flex justify-content-between">
-                <button class="btn btn-outline-secondary btn-sm" onclick="editWorkout({{id}})">Edit</button>
-                <button class="btn btn-outline-danger btn-sm" onclick="deleteWorkout({{id}})">
-                    <i class="fa fa-trash"></i> Delete
-                </button>
-            </div>
+        <div class=" row justify-content-center col-sm-11 col-md-12 col-lg-10">
+             {{#each workouts}}
+                <a href="/workouts/{{dataValues.id}}" class="col-sm-6 col-md-5 col-lg-4 text-decoration-none text-dark mt-4">
+                    <div class="card shadow-sm rounded">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{dataValues.name}}</h5>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between">
+                            <button class="btn btn-outline-secondary btn-sm" onclick="editWorkout({{id}})">Edit</button>
+                            <button class="btn btn-outline-danger btn-sm" onclick="deleteWorkout({{id}})">
+                                <i class="fa fa-trash"></i> Delete
+                            </button>
+                        </div>
+                    </div>
+                </a>
+            {{/each}}
         </div>
-    </a>
-{{/each}}
     </div>
 </div>
 
