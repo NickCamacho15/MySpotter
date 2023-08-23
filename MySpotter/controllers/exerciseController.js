@@ -5,8 +5,9 @@ const { Workout } = require('../models');
 module.exports = {
     getAllExercises: async (req, res) => {
         try {
-          const exercises = await Exercise.findAll({ where: { workoutId: req.params.workoutId } });
-          res.json(exercises);
+          const exercises = await Exercise.findAll({ where: { workout_id: req.params.workout_id } });
+          const workout = await Workout.findAll({ where: { id: req.params.workout_id } });
+          res.render('workout', {exercises, workout});
         } catch (err) {
           res.status(500).json(err);
         }

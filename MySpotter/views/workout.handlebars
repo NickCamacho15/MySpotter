@@ -1,6 +1,8 @@
 <div class="row justify-content-center">
     <div class="col-8 mt-5 text-center">
-        <h3>{{workout.name}}</h3>
+        {{#each workout}}
+        <h3>{{dataValues.name}}</h3>
+        {{/each}}
     </div>
     <div class="col-8 text-right mb-3">
         <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#createExerciseModal">
@@ -10,13 +12,13 @@
 
     <div class="row justify-content-center">
         {{#each exercises}}
-        <a href="/workouts/{{workoutId}}/exercises/{{id}}" class="col-md-4 mb-4 text-decoration-none text-dark">
+        <a href= "api/workouts/{{workout_Id}}/exercises/{{id}}" class="col-md-4 text-decoration-none text-dark">
             <div class="card shadow-sm rounded">
                 <div class="card-body text-center">
-                    <p>Exercise Name: {{name}}</p>
-                    <p>Weight Used: {{weight}}</p>
-                    <p>Sets: {{sets}}</p>
-                    <p>Reps: {{reps}}</p>
+                    <p>Exercise Name: {{dataValues.name}}</p>
+                    <p>Weight Used: {{dataValues.weight}}</p>
+                    <p>Sets: {{dataValues.sets}}</p>
+                    <p>Reps: {{dataValues.reps}}</p>
                     <div class="card-footer d-flex justify-content-between">
                         <button class="btn btn-edit-exercise"
         onclick="openEditModal(this)"
