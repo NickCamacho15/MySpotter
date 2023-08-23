@@ -56,7 +56,6 @@ router.put('/api/exercises/:exerciseId', async (req, res) => {
 
 router.get('/', (req, res) => {
     if (req.session.loggedIn) {
-      console.log(req.session,'/');
       res.redirect('/api/workouts/');
     } else {
         res.render('home');
