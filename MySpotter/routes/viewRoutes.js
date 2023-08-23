@@ -55,20 +55,16 @@ router.put('/api/exercises/:exerciseId', async (req, res) => {
 
 
 router.get('/', (req, res) => {
-    if (req.session.loggedIn) {
-      res.redirect('/api/workouts/');
+    if (req.session.user) {
+        const username = req.session.user.username;
+        res.render('index', { username }); 
     } else {
         res.render('home');
     }
 });
 
 router.get('/index', (req, res) => {
-    if (req.session.loggedIn) {
-      console.log(req,'/index');
-      res.redirect('/api/workouts/');
-    } else {
-        res.render('home');
-    }
+      res.render('index');
   });
 
 router.get('/login', (req, res) => {
