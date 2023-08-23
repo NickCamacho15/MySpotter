@@ -74,18 +74,9 @@ module.exports = {
   createUser: async (req, res) => {
     try {
       const hashedPassword = await bcrypt.hash(req.body.password, 10); 
-      const newUser = await User.create({
-        username: req.body.username,
-        email: req.body.email,
-        password: hashedPassword 
-        });
-      req.session.save(() => {
-        req.session.loggedIn = true;
-        req.session.userId = newUser.id;
-        req.session.user = newUser;
-        res.status(200).json({ user: newUser, message: 'You are now logged in!' });
-      });
-
+      const newUser = await User.create({ ...req.body, password: hashedPassword });
+      req.session.user = newUser; 
+      res.redirect('/index'); 
     } catch (err) {
       res.status(500).json(err);
     }
