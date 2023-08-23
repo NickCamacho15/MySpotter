@@ -56,8 +56,18 @@ module.exports = {
       if (!validPassword) {
         return res.status(401).json({ message: 'Incorrect username or password' });
       }
-      req.session.user = user; 
-      res.redirect('/index'); 
+      req.session.save(() => {
+        req.session.loggedIn = true;
+        console.log(
+          'File: user-routes.js ~ line 57 ~ req.session.save ~ req.session.cookie',
+          req.session.cookie
+        );
+        req.session.userId = user.id;
+        req.session.user = user; 
+        res
+          .status(200)
+          .json({ message: 'You are now logged in!' });
+      });
     } catch (err) {
       res.status(500).json(err);
     }

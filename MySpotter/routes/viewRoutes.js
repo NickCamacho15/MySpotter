@@ -64,7 +64,6 @@ router.get('/', (req, res) => {
 
 router.get('/index', (req, res) => {
     if (req.session.loggedIn) {
-      console.log(req,'/index');
       res.redirect('/api/workouts/');
     } else {
         res.render('home');
@@ -78,6 +77,7 @@ router.get('/login', (req, res) => {
 router.get('/signup', (req, res) => {
   res.render('signup'); 
 });
+
 const { Workout } = require('../models');
 
 router.get('/workouts/:id', async (req, res) => {

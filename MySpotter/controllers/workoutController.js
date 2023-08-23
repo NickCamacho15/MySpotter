@@ -3,8 +3,8 @@ const { Workout } = require('../models');
 module.exports = {
     getAllWorkouts: async (req, res) => {
         try {
-          const workouts = await Workout.findAll({ where: { userId: req.session.userId } });
-          res.json(workouts);
+          const workouts = await Workout.findAll({ where: { user_id: req.session.userId } });
+          res.render('index', {workouts});
         } catch (err) {
           res.status(500).json(err);
         }
