@@ -4,6 +4,18 @@ const { Exercise } = require('../models');
 router.get('/workouts', async (req, res)=> {
   res.render('workouts')
 });
+const db = require('./db');
+
+// Usage example
+db.getWorkoutNames((error, results) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log(results);
+  }
+});
+
+db.connection.end();
 
 
 router.get('/exercises', async (req, res)=> {
