@@ -1,7 +1,6 @@
 document.getElementById("editExerciseModal").addEventListener('show.bs.modal', (event) => {
     
     var button = event.relatedTarget.parentNode.parentNode; // Button that triggered the modal
-    console.log(button.childNodes[1].getAttribute("value"));
     const workoutForm = document.querySelector('.edit-exercise-form');
     workoutForm.addEventListener('submit', newFormHandler);
     
@@ -48,5 +47,11 @@ document.getElementById("editExerciseModal").addEventListener('show.bs.modal', (
     
         }
     }
+    
+});
+document.getElementById("deleteExerciseModal").addEventListener('show.bs.modal', (event) => {
+    
+    let button = event.relatedTarget.parentNode.parentNode; // Button that triggered the modal
+    console.log(button);
     
 });

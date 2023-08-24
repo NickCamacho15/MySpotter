@@ -55,10 +55,6 @@ module.exports = {
   deleteExercise: async (req, res) => {
     try {
       const result = await Exercise.destroy({ where: { id: req.params.id } });
-      if (result === 0) {
-        return res.status(404).json({ message: 'Exercise not found' });
-      }
-      res.json({ message: 'Exercise deleted successfully' });
     } catch (err) {
       res.status(500).json(err);
     }

@@ -12,16 +12,13 @@
     <div class="row justify-content-center">
         <div class=" row justify-content-center col-sm-11 col-md-12 col-lg-10">
              {{#each workouts}}
-                <a href="{{dataValues.id}}/exercises" class="col-sm-6 col-md-5 col-lg-4 text-dark mt-4">
+                <a href="{{dataValues.id}}/exercises" class="col-sm-6 col-md-5 col-lg-4 text-dark mt-4 text-decoration-none">
                     <div class="card shadow-sm rounded">
                         <div class="card-body text-center">
-                            <h5 class="card-title">{{dataValues.name}}</h5>
+                            <p value="{{dataValues.id}}" id="workoutId"></p>
+                            <h5 value="{{dataValues.name}}" id="DefaultName" class="card-title">{{dataValues.name}}</h5>
                         </div>
                         <div class="card-footer d-flex justify-content-between">
-                            <button class="btn btn-outline-secondary btn-sm" onclick="editWorkout({{id}})">Edit</button>
-                            <button class="btn btn-outline-danger btn-sm" onclick="deleteWorkout({{id}})">
-                                <i class="fa fa-trash"></i> Delete
-                            </button>
                         </div>
                     </div>
                 </a>
@@ -53,6 +50,27 @@
             </div>
         </div>
     </div>
+</div>
+<!-- EDIT Workout Modal -->
+<div class="modal fade" id="editWorkoutModal" tabindex="-1" aria-labelledby="editWorkoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editWorkoutModalLabel">Edit Exercise</h5>
+        <button type="button" class="btn-close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <form class="edit-workout-form">
+          <input type="hidden" id="edit-workout-id">
+          <div class="mb-3">
+            <label for="edit-workout-name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="edit-exercise-name">
+          </div>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 <script src="/js/workout-actions.js"></script>
 <script src="/js/add-workout.js"></script>
