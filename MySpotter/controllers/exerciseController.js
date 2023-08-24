@@ -39,8 +39,10 @@ module.exports = {
   },  
 
   updateExercise: async (req, res) => {
+    console.log(req.body.exerciseId);
     try {
-      const result = await Exercise.update(req.body, { where: { id: req.params.id } });
+      
+      const result = await Exercise.update(req.body, { where: { id: req.body.exerciseId } });
       if (result[0] === 0) {
         return res.status(404).json({ message: 'Exercise not found' });
       }

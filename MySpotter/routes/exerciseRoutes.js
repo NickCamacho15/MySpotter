@@ -10,7 +10,7 @@ const {
 router.get('/', getAllExercises);
 router.get('/:id', getExerciseById);
 router.post('/', createExercise);
-router.put('/:id', updateExercise);
+router.put('/', updateExercise);
 router.delete('/:id', deleteExercise);
 
 

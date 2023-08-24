@@ -1,3 +1,9 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const workoutForm = document.querySelector('.new-workout-form');
+    if (workoutForm) {
+        workoutForm.addEventListener('submit', newFormHandler);
+    }
+
     async function newFormHandler(event) {
         event.preventDefault();
     
@@ -21,7 +27,5 @@
     }
     
 
-const workoutForm = document.querySelector('.new-workout-form');
-if (workoutForm) {
-    workoutForm.addEventListener('submit', newFormHandler);
-}
+
+})

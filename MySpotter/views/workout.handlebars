@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8 mt-5 text-center">
         {{#each workout}}
-        <h3>{{dataValues.name}}</h3>
+        <h3 value="{{dataValues.id}}" id="workoutId">{{dataValues.name}}</h3>
         {{/each}}
     </div>
     <div class="col-8 text-right mb-3">
@@ -16,20 +16,16 @@
                 <div class="col-sm-8 col-md-8 col-lg-4 text-dark mt-4 ">
                     <div class="card shadow-sm rounded">
                         <div class="card-body text-center p-0 pt-2 ">
-                            <p>Exercise Name: {{dataValues.name}}</p>
-                            <p>Weight Used: {{dataValues.weight}}</p>
-                            <p>Sets: {{dataValues.sets}}</p>
-                            <p>Reps: {{dataValues.reps}}</p>
+                            <p value="{{dataValues.id}}" id="exerciseId"></p>
+                            <p value="{{dataValues.name}}" id="DefaultName">Exercise Name: {{dataValues.name}}</p>
+                            <p value="{{dataValues.weight}}" id="DefaultWeight">Weight Used: {{dataValues.weight}}</p>
+                            <p value="{{dataValues.sets}}" id="DefaultSets">Sets: {{dataValues.sets}}</p>
+                            <p value="{{dataValues.reps}}" id="DefaultReps">Reps: {{dataValues.reps}}</p>
                             <div class="card-footer d-flex justify-content-between">
-                                <button class="btn btn-outline-secondary btn-sm"
-                                    onclick="openEditModal(this)"
-                                    data-id="{{id}}"
-                                    data-name="{{name}}"
-                                    data-weight="{{weight}}"
-                                    data-sets="{{sets}}"
-                                    data-reps="{{reps}}">Edit
+                                <button type="button" id='editBtn' class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editExerciseModal">
+                                    Edit
                                 </button>
-                                <button class="btn btn-outline-danger btn-sm btn-delete-exercise" data-id="{{id}}">
+                                <button  class="btn btn-outline-danger btn-sm btn-delete-exercise" data-id="{{id}}">
                                     <i class="fa fa-trash"></i> Delete
                                 </button>
                             </div>
@@ -79,7 +75,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="editExerciseModalLabel">Edit Exercise</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
         <form class="edit-exercise-form">
@@ -100,7 +96,7 @@
             <label for="edit-exercise-reps" class="form-label">Reps</label>
             <input type="number" class="form-control" id="edit-exercise-reps">
           </div>
-          <button type="submit" class="btn btn-primary">Save changes</button>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
         </form>
       </div>
     </div>
@@ -114,24 +110,4 @@
     document.addEventListener("DOMContentLoaded", function() {
         var myModal = new bootstrap.Modal(document.getElementById("createExerciseModal"));
     });
-    function openEditModal(button) {
-    // Get the exercise data from the button's data attributes
-    var id = button.getAttribute('data-id');
-    var name = button.getAttribute('data-name');
-    var weight = button.getAttribute('data-weight');
-    var sets = button.getAttribute('data-sets');
-    var reps = button.getAttribute('data-reps');
-
-    // Populate the edit modal with the exercise's current data
-    document.getElementById('edit-exercise-id').value = id;
-    document.getElementById('edit-exercise-name').value = name;
-    document.getElementById('edit-exercise-weight').value = weight;
-    document.getElementById('edit-exercise-sets').value = sets;
-    document.getElementById('edit-exercise-reps').value = reps;
-
-    // Open the edit modal
-    var editModal = new bootstrap.Modal(document.getElementById('editExerciseModal'));
-    editModal.show();
-}
-
 </script>
