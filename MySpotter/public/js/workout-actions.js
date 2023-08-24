@@ -52,3 +52,4 @@ document.getElementById("editWorkoutModal").addEventListener('show.bs.modal', (e
     
 });
 
+    
