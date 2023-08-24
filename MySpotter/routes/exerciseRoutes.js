@@ -8,7 +8,7 @@ const {
 } = require('../controllers/exerciseController');
 
 router.get('/', getAllExercises);
-router.get('/:id', deleteExercise);
+router.delete('/:id', deleteExercise);
 router.post('/', createExercise);
 router.put('/', updateExercise);
 
