@@ -12,11 +12,11 @@
     <div class="row justify-content-center">
         <div class=" row justify-content-center col-sm-11 col-md-12 col-lg-10">
              {{#each workouts}}
-                <div  class="col-sm-6 col-md-5 col-lg-4 text-dark mt-4 card shadow-sm rounded p-0">
-                    <a href="{{dataValues.id}}/exercises" class=" text-decoration-none">
+                <div  class="col-sm-6 col-md-5 col-lg-4 text-dark mt-4 card shadow-sm rounded p-0 text-decoration-none">
+                    <a href="{{dataValues.id}}/exercises" class="text-decoration-none">
                         <div class="card-body text-center">
-                            <p value="{{dataValues.id}}" id="workoutId"></p>
-                            <h5 value="{{dataValues.name}}" id="DefaultName" class="card-title">{{dataValues.name}}</h5>
+                            <p value="{{dataValues.id}}" class="text-decoration-none" id="workoutId"></p>
+                            <h5  class="text-decoration-none" value="{{dataValues.name}}" id="DefaultName" class="card-title">{{dataValues.name}}</h5>
                         </div>
                         
                     </a>

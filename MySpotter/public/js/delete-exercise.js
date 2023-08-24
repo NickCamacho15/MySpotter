@@ -7,4 +7,7 @@ location.reload();
             'Content-Type': 'application/json',
         },
     });
+    reponse.then(() => {
+        location.reload();
+    });
 }
