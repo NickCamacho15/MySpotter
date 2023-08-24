@@ -1,6 +1,10 @@
-function editWorkout(workoutId) {
+function openEditModal(element) {
+    const workoutId = element.dataset.id;
     window.location.href = `/edit-workout/${workoutId}`;
 }
+
+// Export the function to make it accessible in other script files if needed
+window.openEditModal = openEditModal;
 
 async function deleteWorkout(workoutId) {
     const response = await fetch(`/workouts/${workoutId}`, {
@@ -18,3 +22,5 @@ async function deleteWorkout(workoutId) {
     }
 }
 
+// Export the function to make it accessible in other script files if needed
+window.deleteWorkout = deleteWorkout;
