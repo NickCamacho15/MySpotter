@@ -11,31 +11,33 @@
     </div>
 
     <div class="row justify-content-center">
-        {{#each exercises}}
-        <a href= "api/workouts/{{workout_Id}}/exercises/{{id}}" class="col-md-4 text-decoration-none text-dark">
-            <div class="card shadow-sm rounded">
-                <div class="card-body text-center">
-                    <p>Exercise Name: {{dataValues.name}}</p>
-                    <p>Weight Used: {{dataValues.weight}}</p>
-                    <p>Sets: {{dataValues.sets}}</p>
-                    <p>Reps: {{dataValues.reps}}</p>
-                    <div class="card-footer d-flex justify-content-between">
-                        <button class="btn btn-edit-exercise"
-        onclick="openEditModal(this)"
-        data-id="{{id}}"
-        data-name="{{name}}"
-        data-weight="{{weight}}"
-        data-sets="{{sets}}"
-        data-reps="{{reps}}">Edit</button>
-
-                        <button class="btn btn-outline-danger btn-sm btn-delete-exercise" data-id="{{id}}">
-                            <i class="fa fa-trash"></i> Delete
-                        </button>
+        <div class=" row justify-content-center col-sm-11 col-md-12 col-lg-10">
+            {{#each exercises}}
+                <div class="col-sm-8 col-md-8 col-lg-4 text-dark mt-4 ">
+                    <div class="card shadow-sm rounded">
+                        <div class="card-body text-center p-0 pt-2 ">
+                            <p>Exercise Name: {{dataValues.name}}</p>
+                            <p>Weight Used: {{dataValues.weight}}</p>
+                            <p>Sets: {{dataValues.sets}}</p>
+                            <p>Reps: {{dataValues.reps}}</p>
+                            <div class="card-footer d-flex justify-content-between">
+                                <button class="btn btn-outline-secondary btn-sm"
+                                    onclick="openEditModal(this)"
+                                    data-id="{{id}}"
+                                    data-name="{{name}}"
+                                    data-weight="{{weight}}"
+                                    data-sets="{{sets}}"
+                                    data-reps="{{reps}}">Edit
+                                </button>
+                                <button class="btn btn-outline-danger btn-sm btn-delete-exercise" data-id="{{id}}">
+                                    <i class="fa fa-trash"></i> Delete
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </a>
-        {{/each}}
+            {{/each}}
+        </div>
     </div>
 <!-- Create Exercise Modal -->
 <div class="modal fade" id="createExerciseModal" tabindex="-1" aria-labelledby="createExerciseModalLabel" aria-hidden="true">

@@ -24,30 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         if (response.ok) {
-            const data = await response.json();
-            createExerciseModal.hide();
-
-            const exercisesContainer = document.querySelector('.row.justify-content-center');
-            const newExercise = `
-                <div class="col-md-4 mb-4">
-                    <div class="card shadow-sm rounded">
-                        <div class="card-body text-center">
-                            <p>Exercise Name: ${data.name}</p>
-                            <p>Weight Used: ${data.weight}</p>
-                            <p>Sets: ${data.sets}</p>
-                            <p>Reps: ${data.reps}</p>
-                        </div>
-                        <div class="card-footer d-flex justify-content-between">
-                            <button class="btn btn-outline-secondary btn-sm" onclick="openEditModal(this)" data-id="${data.id}" data-name="${data.name}" data-weight="${data.weight}" data-sets="${data.sets}" data-reps="${data.reps}">Edit</button>
-                            <button type="button" class="btn btn-outline-danger" onclick="deleteExercise(${data.id})">
-                                <i class="fa fa-trash"></i> Delete
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `;
-            exercisesContainer.insertAdjacentHTML('beforeend', newExercise);
-
+            location.reload();
         } else {
             alert('Failed to add exercise');
         }
