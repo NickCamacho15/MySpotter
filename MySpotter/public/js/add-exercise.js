@@ -8,9 +8,9 @@ document.addEventListener("DOMContentLoaded", function() {
         const weight = document.querySelector('#weight').value;
         const exercise_sets = document.querySelector('#sets').value;
         const exercise_reps = document.querySelector('#reps').value;
-        const workoutId = location.pathname.split('/')[2];
+        const workoutId = location.pathname.split('/')[3];
 
-        const response = await fetch(`/api/workouts/${workoutId}/exercises`, {
+        const response = await fetch(`/api/workouts/${workoutId}/exercises/`, {
             method: 'POST',
             body: JSON.stringify({
                 name: exercise_name,

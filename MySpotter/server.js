@@ -39,7 +39,6 @@ app.use('/js', express.static(path.join(__dirname, '/public/js')));
 
 
 app.use('/api/users', userRoutes);
-app.use('/api/workouts/:workout_id/exercises', exerciseRoutes);
 app.use('/api/workouts', workoutRoutes);
 app.use('/', viewRoutes);
 
